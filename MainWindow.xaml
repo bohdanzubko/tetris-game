@@ -45,5 +45,22 @@
                    Margin="4,250,50,231"
                    TextAlignment="Center" Grid.ColumnSpan="2"/>
 
+        <Grid x:Name="GameOverMenu"
+              Background="#CC000000"
+              Grid.RowSpan="3"
+              Grid.ColumnSpan="4"
+              Visibility="Hidden">
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Game Over"
+                           FontSize="48"
+                           TextAlignment="Center"/>
+
+                <TextBlock x:Name="FinalScoreText"
+                           Text="Score: "
+                           FontSize="36"
+                           TextAlignment="Center"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
