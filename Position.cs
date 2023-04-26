@@ -1,4 +1,4 @@
-﻿namespace TetrisGame
+﻿namespace Tetris
 {
     public class Position
     {

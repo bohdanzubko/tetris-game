@@ -6,7 +6,14 @@
 
         public Block CurrentBlock
         {
+            get => currentBlock;
+            private set
+            {
+                currentBlock = value;
+                currentBlock.Reset();
 
+                MoveBlockDown();
+            }
         }
 
         public GameGrid GameGrid { get; }
@@ -16,12 +23,21 @@
 
         public GameState()
         {
-
+            GameGrid = new GameGrid(22, 10);
+            BlockQueue = new BlockQueue();
+            CurrentBlock = BlockQueue.GetAndUpdate();
         }
 
         private bool BlockFits()
         {
-
+            foreach (Position p in CurrentBlock.TilePositions())
+            {
+                if (!GameGrid.IsEmpty(p.Row, p.Column))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public void RotateBlockCW()
@@ -46,7 +62,7 @@
 
         private bool IsGameOver()
         {
-            
+
         }
 
         private void PlaceBlock()
@@ -56,6 +72,7 @@
 
         public void MoveBlockDown()
         {
+
         }
     }
 }

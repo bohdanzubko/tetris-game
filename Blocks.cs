@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace TetrisGame
+﻿namespace Tetris
 {
-   public abstract class Block
+    public abstract class Block
     {
         protected abstract Position[][] Tiles { get; }
         protected abstract Position StartOffset { get; }
@@ -14,6 +12,14 @@ namespace TetrisGame
         public Block()
         {
             offset = new Position(StartOffset.Row, StartOffset.Column);
+        }
+
+        public IEnumerable<Position> TilePositions()
+        {
+            foreach (Position p in Tiles[rotationState])
+            {
+                yield return new Position(p.Row + offset.Row, p.Column + offset.Column);
+            }
         }
 
         public void RotateCW()

@@ -1,5 +1,4 @@
 ﻿using System;
-using TetrisGame;
 
 namespace Tetris
 {
@@ -22,7 +21,7 @@ namespace Tetris
 
         public BlockQueue()
         {
-
+            NextBlock = RandomBlock();
         }
 
         private Block RandomBlock()
