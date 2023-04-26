@@ -42,22 +42,34 @@
 
         public void RotateBlockCW()
         {
+            CurrentBlock.RotateCW();
 
+            if (!BlockFits())
+                CurrentBlock.RotateCCW();
         }
 
         public void RotateBlockCCW()
         {
+            CurrentBlock.RotateCCW();
 
+            if (!BlockFits())
+                CurrentBlock.RotateCW();
         }
 
         public void MoveBlockLeft()
         {
+            CurrentBlock.Move(0, -1);
 
+            if (!BlockFits())
+                CurrentBlock.Move(0, 1);
         }
 
         public void MoveBlockRight()
         {
+            CurrentBlock.Move(0, 1);
 
+            if (!BlockFits())
+                CurrentBlock.Move(0, -1);
         }
 
         private bool IsGameOver()
@@ -72,7 +84,13 @@
 
         public void MoveBlockDown()
         {
+            CurrentBlock.Move(1, 0);
 
+            if (!BlockFits())
+            {
+                CurrentBlock.Move(-1, 0);
+                PlaceBlock();
+            }
         }
     }
 }
