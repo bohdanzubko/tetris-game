@@ -88,5 +88,51 @@ namespace Tetris
             DrawBlock(gameState.CurrentBlock);
             ScoreText.Text = $"Score: {gameState.Score}";
         }
+
+        private async Task GameLoop()
+        {
+            Draw(gameState);
+
+            while (!gameState.GameOver)
+            {
+                await Task.Delay(1000);
+                gameState.MoveBlockDown();
+                Draw(gameState);
+            }
+
+            GameOverMenu.Visibility = Visibility.Visible;
+            FinalScoreText.Text = $"Score: {gameState.Score}";
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (gameState.GameOver)
+            {
+                return;
+            }
+
+            switch (e.Key)
+            {
+                case Key.A:
+                    gameState.MoveBlockLeft();
+                    break;
+                case Key.D:
+                    gameState.MoveBlockRight();
+                    break;
+                case Key.S:
+                    gameState.MoveBlockDown();
+                    break;
+                case Key.W:
+                    gameState.RotateBlockCW();
+                    break;
+                case Key.Z:
+                    gameState.RotateBlockCCW();
+                    break;
+                default:
+                    return;
+            }
+
+            Draw(gameState);
+        }
     }
 }
