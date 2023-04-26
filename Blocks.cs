@@ -1,4 +1,6 @@
-﻿namespace Tetris
+﻿using System.Collections.Generic;
+
+namespace Tetris
 {
     public abstract class Block
     {
