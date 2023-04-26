@@ -138,5 +138,10 @@ namespace Tetris
 
             Draw(gameState);
         }
+
+        private async void GameCanvas_Loaded(object sender, RoutedEventArgs e)
+        {
+            await GameLoop();
+        }
     }
 }
