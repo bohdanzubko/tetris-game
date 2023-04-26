@@ -29,11 +29,11 @@
         </Grid.Background>
 
         <Viewbox Grid.Row="1"
-                 Margin="19,0,64,1" Grid.ColumnSpan="3">
+                 Margin="19,0,64,0" Grid.ColumnSpan="3">
             <Canvas x:Name="GameCanvas"
                     Background="#101010"
                     Width="250"
-                    Height="510"
+                    Height="500"
                     ClipToBounds="True"
                     Loaded="GameCanvas_Loaded"/>
         </Viewbox>
