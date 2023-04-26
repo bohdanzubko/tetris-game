@@ -74,12 +74,29 @@
 
         private bool IsGameOver()
         {
-
+            return !(GameGrid.IsRowEmpty(0) && GameGrid.IsRowEmpty(1));
         }
 
         private void PlaceBlock()
         {
+            foreach (Position p in CurrentBlock.TilePositions())
+                GameGrid[p.Row, p.Column] = CurrentBlock.Id;
 
+            switch (GameGrid.ClearFullRows())
+            {
+                case 0: break;
+                case 1: Score += 100; break;
+                case 2: Score += 200; break;
+                case 3: Score += 700; break;
+                case 4: Score += 1500; break;
+            }
+
+            if (IsGameOver())
+                GameOver = true;
+            else
+            {
+                CurrentBlock = BlockQueue.GetAndUpdate();
+            }
         }
 
         public void MoveBlockDown()
