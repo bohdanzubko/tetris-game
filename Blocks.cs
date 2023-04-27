@@ -66,7 +66,7 @@ namespace Tetris
         };
 
         public override int Id => 1;
-        protected override Position StartOffset => new Position(-1, 3);
+        protected override Position StartOffset => new (-1, 3);
     }
 
     public class JBlock : Block
@@ -102,7 +102,7 @@ namespace Tetris
         };
 
         public override int Id => 4;
-        protected override Position StartOffset => new Position(0, 4);
+        protected override Position StartOffset => new (0, 4);
     }
 
     public class SBlock : Block
