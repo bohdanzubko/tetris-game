@@ -28,7 +28,7 @@ namespace Tetris
         private readonly Image[,] imageControls;
         private readonly int maxDelay = 1000;
         private readonly int minDelay = 75;
-        private readonly int delayDecrease = 10;
+        private readonly int delayDecrease = 12;
 
         private GameState gameState = new GameState();
 
