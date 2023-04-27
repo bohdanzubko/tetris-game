@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Tetris
 {
@@ -16,13 +17,8 @@ namespace Tetris
             offset = new Position(StartOffset.Row, StartOffset.Column);
         }
 
-        public IEnumerable<Position> TilePositions()
-        {
-            foreach (Position p in Tiles[rotationState])
-            {
-                yield return new Position(p.Row + offset.Row, p.Column + offset.Column);
-            }
-        }
+        public IEnumerable<Position> TilePositions() =>
+            Tiles[rotationState].Select(p => new Position(p.Row + offset.Row, p.Column + offset.Column));
 
         public void RotateCW()
         {
