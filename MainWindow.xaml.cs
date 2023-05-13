@@ -162,5 +162,12 @@ namespace Tetris
         {
             await GameLoop();
         }
+
+        private async void PlayAgain_Click(object sender, RoutedEventArgs e)
+        {
+            gameState = new GameState();
+            GameOverMenu.Visibility = Visibility.Hidden;
+            await GameLoop();
+        }
     }
 }
