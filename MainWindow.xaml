@@ -58,8 +58,8 @@
 
         <Grid x:Name="GameOverMenu"
               Background="#CC000000"
-              Grid.RowSpan="3"
-              Grid.ColumnSpan="4"
+              Grid.RowSpan="2"
+              Grid.ColumnSpan="3"
               Visibility="Hidden">
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center">
@@ -71,6 +71,12 @@
                            Text="Score: "
                            FontSize="36"
                            TextAlignment="Center"/>
+
+                <Button Content="Play Again"
+                        Background="LightGreen"
+                        Margin="0,20,0,0"
+                        Padding="5"
+                        Click="PlayAgain_Click"/>
             </StackPanel>
         </Grid>
     </Grid>
