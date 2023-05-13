@@ -26,7 +26,7 @@ namespace Tetris
         };
 
         private readonly ImageSource[] blockImages = new ImageSource[]
-{
+        {
             new BitmapImage(new Uri("Assets/Block-Empty.png", UriKind.Relative)),
             new BitmapImage(new Uri("Assets/Block-I.png", UriKind.Relative)),
             new BitmapImage(new Uri("Assets/Block-J.png", UriKind.Relative)),
@@ -35,7 +35,7 @@ namespace Tetris
             new BitmapImage(new Uri("Assets/Block-S.png", UriKind.Relative)),
             new BitmapImage(new Uri("Assets/Block-T.png", UriKind.Relative)),
             new BitmapImage(new Uri("Assets/Block-Z.png", UriKind.Relative))
-};
+        };
 
         private readonly Image[,] imageControls;
         private readonly int maxDelay = 1000;
