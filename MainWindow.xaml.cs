@@ -151,6 +151,9 @@ namespace Tetris
                 case Key.Z:
                     gameState.RotateBlockCCW();
                     break;
+                case Key.Space:
+                    gameState.DropBlock();
+                    break;
                 default:
                     return;
             }

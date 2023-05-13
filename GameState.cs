@@ -133,5 +133,11 @@
 
             return drop;
         }
+
+        public void DropBlock()
+        {
+            CurrentBlock.Move(BlockDropDistance(), 0);
+            PlaceBlock();
+        }
     }
 }
