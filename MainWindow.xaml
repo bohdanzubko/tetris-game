@@ -70,7 +70,7 @@
         </Button>
 
         <Grid x:Name="PauseMenu"
-              Background="#4FB06908"
+              Background="#3FB06908"
               Grid.RowSpan="2"
               Grid.ColumnSpan="3"
               Visibility="Hidden">
@@ -83,18 +83,23 @@
                 <TextBlock Text="Click Play to continue"
                            FontSize="16"
                            TextAlignment="Center"/>
-
-                <Button x:Name="PlayButton"
-                        Height="60"
-                        Width="60"
-                        Margin="10"
-                        Click="Play_Click">
-                    <Button.Background>
-                        <ImageBrush ImageSource="Assets/Play_button.png"/>
-                    </Button.Background>
-                </Button>
             </StackPanel>
         </Grid>
+
+        <Button x:Name="PlayButton"
+                Height="60"
+                Width="60"
+                Grid.Row="1"
+                Grid.Column="2"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Left"
+                Margin="40,0,0,20"
+                Click="Play_Click"
+                Visibility="Hidden">
+            <Button.Background>
+                <ImageBrush ImageSource="Assets/Play_button.png"/>
+            </Button.Background>
+        </Button>
 
         <Grid x:Name="GameOverMenu"
               Background="#CC000000"

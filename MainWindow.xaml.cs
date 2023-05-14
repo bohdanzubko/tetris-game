@@ -199,11 +199,13 @@ namespace Tetris
             {
                 PlayButton.Focus();
                 gamePaused = false;
+                PlayButton.Visibility = Visibility.Hidden;
                 PauseMenu.Visibility = Visibility.Hidden;
             }
             else
             {
                 gamePaused = true;
+                PlayButton.Visibility = Visibility.Visible;
                 PauseMenu.Visibility = Visibility.Visible;
             }
         }
