@@ -41,6 +41,7 @@ namespace Tetris
         private readonly int maxDelay = 1000;
         private readonly int minDelay = 75;
         private readonly int delayDecrease = 12;
+        private bool gamePaused = false;
 
         private GameState gameState = new GameState();
 
@@ -131,8 +132,11 @@ namespace Tetris
             {
                 int delay = Math.Max(minDelay, maxDelay - ((int)gameState.Score / 100 * delayDecrease));
                 await Task.Delay(delay);
-                gameState.MoveBlockDown();
-                Draw(gameState);
+                if (!gamePaused)
+                {
+                    gameState.MoveBlockDown();
+                    Draw(gameState);
+                }
             }
 
             GameOverMenu.Visibility = Visibility.Visible;
@@ -141,9 +145,10 @@ namespace Tetris
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (gameState.GameOver)
+            if (gameState.GameOver || gamePaused)
             {
-                return;
+                if (e.Key != Key.P)
+                    return;
             }
 
             switch (e.Key)
@@ -162,6 +167,9 @@ namespace Tetris
                     break;
                 case Key.Z:
                     gameState.RotateBlockCCW();
+                    break;
+                case Key.P:
+                    Pause();
                     break;
                 case Key.Space:
                     gameState.DropBlock();
@@ -183,6 +191,31 @@ namespace Tetris
             gameState = new GameState();
             GameOverMenu.Visibility = Visibility.Hidden;
             await GameLoop();
+        }
+
+        private void Pause()
+        {
+            if (gamePaused)
+            {
+                PlayButton.Focus();
+                gamePaused = false;
+                PauseMenu.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                gamePaused = true;
+                PauseMenu.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Play_Click(object sender, RoutedEventArgs e)
+        {
+            Pause();
+        }
+
+        private void Pause_Click(object sender, RoutedEventArgs e)
+        {
+            Pause();
         }
     }
 }
