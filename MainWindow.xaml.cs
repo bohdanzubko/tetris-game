@@ -40,7 +40,7 @@ namespace Tetris
         private readonly Image[,] imageControls;
         private readonly int maxDelay = 1000;
         private readonly int minDelay = 75;
-        private readonly int delayDecrease = 12;
+        private int delayDecrease = 12;
         private bool gamePaused = false;
 
         private GameState gameState = new GameState();
@@ -228,6 +228,21 @@ namespace Tetris
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void EasyDifficulty_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MediumDifficulty_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void HardDifficulty_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
