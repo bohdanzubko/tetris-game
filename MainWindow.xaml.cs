@@ -219,5 +219,15 @@ namespace Tetris
         {
             Pause();
         }
+
+        private void NewGame_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
