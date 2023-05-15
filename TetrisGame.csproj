@@ -21,6 +21,7 @@
     <None Remove="Assets\Icon.ico" />
     <None Remove="Assets\Pause_button.png" />
     <None Remove="Assets\Play_button.png" />
+    <None Remove="Assets\TetrisName.png" />
     <None Remove="Assets\TileBlue.png" />
     <None Remove="Assets\TileCyan.png" />
     <None Remove="Assets\TileEmpty.png" />
@@ -48,6 +49,7 @@
     <Resource Include="Assets\Icon.ico" />
     <Resource Include="Assets\Pause_button.png" />
     <Resource Include="Assets\Play_button.png" />
+    <Resource Include="Assets\TetrisName.png" />
     <Resource Include="Assets\TileBlue.png" />
     <Resource Include="Assets\TileCyan.png" />
     <Resource Include="Assets\TileEmpty.png" />

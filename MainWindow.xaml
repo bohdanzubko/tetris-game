@@ -63,7 +63,8 @@
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Left"
                 Margin="40,0,0,20"
-                Click="Pause_Click">
+                Click="Pause_Click"
+                BorderBrush="Transparent">
             <Button.Background>
                 <ImageBrush ImageSource="Assets/Pause_button.png"/>
             </Button.Background>
@@ -95,6 +96,7 @@
                 HorizontalAlignment="Left"
                 Margin="40,0,0,20"
                 Click="Play_Click"
+                BorderBrush="Transparent"
                 Visibility="Hidden">
             <Button.Background>
                 <ImageBrush ImageSource="Assets/Play_button.png"/>
@@ -120,8 +122,31 @@
                 <Button Content="Play Again"
                         Background="LightGreen"
                         Margin="0,20,0,0"
-                        Padding="5"
+                        Padding="10"
                         Click="PlayAgain_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="StartMenu"
+              Grid.RowSpan="2"
+              Grid.ColumnSpan="3">
+            <Grid.Background>
+                <ImageBrush ImageSource="Assets/Background.png"/>
+            </Grid.Background>
+
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Top">
+                <Image Width="400"
+                       Margin="0,100,0,0"
+                       VerticalAlignment="Top"
+                       Source="Assets/TetrisName.png"/>
+
+                <Button Content="Play Tetris"
+                        Width="250"
+                        Background="LightGreen"
+                        Margin="0,150,0,0"
+                        Padding="10"
+                        Click="NewGame_Click"/>
             </StackPanel>
         </Grid>
     </Grid>
