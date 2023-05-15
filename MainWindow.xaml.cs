@@ -244,5 +244,35 @@ namespace Tetris
         {
 
         }
+
+        private void MoveDownKey_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MoveLeftKey_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MoveRightKey_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DropBlockKey_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RotateCWKey_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RotateCCWKey_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

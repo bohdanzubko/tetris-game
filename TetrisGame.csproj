@@ -18,7 +18,6 @@
     <None Remove="Assets\Block-S.png" />
     <None Remove="Assets\Block-T.png" />
     <None Remove="Assets\Block-Z.png" />
-    <None Remove="Assets\DifficultyMenu.png" />
     <None Remove="Assets\Icon.ico" />
     <None Remove="Assets\Pause_button.png" />
     <None Remove="Assets\Play_button.png" />
@@ -48,7 +47,6 @@
     <Resource Include="Assets\Block-S.png" />
     <Resource Include="Assets\Block-T.png" />
     <Resource Include="Assets\Block-Z.png" />
-    <Resource Include="Assets\DifficultyMenu.png" />
     <Resource Include="Assets\Icon.ico" />
     <Resource Include="Assets\Pause_button.png" />
     <Resource Include="Assets\Play_button.png" />
