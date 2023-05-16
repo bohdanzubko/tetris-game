@@ -52,6 +52,10 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left">
 
+            <TextBlock x:Name="DifficultyText"
+                       Text=""
+                       TextAlignment="Center" />
+
             <TextBlock x:Name="ScoreText"
                        Text="Score: "
                        Margin="0, 20"
@@ -200,7 +204,8 @@
                            Padding="10"
                            TextAlignment="Center" />
 
-                <Button Content="Easy"
+                <Button x:Name="EasyButton"
+                        Content="Easy"
                         Style="{DynamicResource RoundButton}"
                         Width="200"
                         Height="60"
@@ -209,7 +214,8 @@
                         Padding="10"
                         Click="EasyDifficulty_Click" />
 
-                <Button Content="Medium"
+                <Button x:Name="MediumButton"
+                        Content="Medium"
                         Style="{DynamicResource RoundButton}"
                         Width="200"
                         Height="60"
@@ -218,7 +224,8 @@
                         Padding="10"
                         Click="MediumDifficulty_Click" />
 
-                <Button Content="Hard"
+                <Button x:Name="HardButton"
+                        Content="Hard"
                         Style="{DynamicResource RoundButton}"
                         Width="200"
                         Height="60"

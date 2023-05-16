@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -280,6 +281,8 @@ namespace Tetris
             maxDelay = 1500;
             minDelay = 300;
             delayDecrease = 12;
+            DifficultyText.Text = "Easy";
+            DifficultyText.Foreground = EasyButton.Background;
             StartGame();
         }
 
@@ -288,6 +291,8 @@ namespace Tetris
             maxDelay = 1300;
             minDelay = 200;
             delayDecrease = 15;
+            DifficultyText.Text = "Medium";
+            DifficultyText.Foreground = MediumButton.Background;
             StartGame();
         }
 
@@ -296,6 +301,8 @@ namespace Tetris
             maxDelay = 1000;
             minDelay = 100;
             delayDecrease = 17;
+            DifficultyText.Text = "Hard";
+            DifficultyText.Foreground = HardButton.Background;
             StartGame();
         }
 
