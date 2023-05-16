@@ -141,7 +141,6 @@ namespace Tetris
 
             GameOverMenu.Visibility = Visibility.Visible;
             SettingsButton.Visibility = Visibility.Visible;
-            SettingsButton.IsEnabled = true;
             FinalScoreText.Text = $"Score: {gameState.Score}";
         }
 
@@ -149,7 +148,7 @@ namespace Tetris
         {
             if (gameState.GameOver || gamePaused)
             {
-                if (e.Key != Key.P || e.Key != Key.Escape)
+                if (e.Key != Key.P && e.Key != Key.Escape)
                     return;
             }
 
@@ -171,7 +170,7 @@ namespace Tetris
                     gameState.RotateBlockCCW();
                     break;
                 case Key.P:
-                    Pause();
+                    PauseGame();
                     break;
                 case Key.Space:
                     gameState.DropBlock();
@@ -180,7 +179,6 @@ namespace Tetris
                     DifficultyMenu.Visibility = Visibility.Hidden;
                     SettingsMenu.Visibility = Visibility.Hidden;
                     SettingsButton.Visibility = Visibility.Visible;
-                    SettingsButton.IsEnabled = true;
                     break;
                 default:
                     return;
@@ -210,10 +208,10 @@ namespace Tetris
         private void PlayAgain_Click(object sender, RoutedEventArgs e)
         {
             DifficultyMenu.Visibility = Visibility.Visible;
-            SettingsButton.IsEnabled = false;
+            SettingsButton.Visibility = Visibility.Hidden;
         }
 
-        private void Pause()
+        private void PauseGame()
         {
             if (gamePaused)
             {
@@ -222,7 +220,6 @@ namespace Tetris
                 PlayButton.Visibility = Visibility.Hidden;
                 PauseMenu.Visibility = Visibility.Hidden;
                 SettingsButton.Visibility = Visibility.Hidden;
-                SettingsButton.IsEnabled = false;
             }
             else
             {
@@ -230,24 +227,23 @@ namespace Tetris
                 PlayButton.Visibility = Visibility.Visible;
                 PauseMenu.Visibility = Visibility.Visible;
                 SettingsButton.Visibility = Visibility.Visible;
-                SettingsButton.IsEnabled = true;
             }
         }
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
-            Pause();
+            PauseGame();
         }
 
         private void Pause_Click(object sender, RoutedEventArgs e)
         {
-            Pause();
+            PauseGame();
         }
 
         private void NewGame_Click(object sender, RoutedEventArgs e)
         {
             DifficultyMenu.Visibility = Visibility.Visible;
-            SettingsButton.IsEnabled = false;
+            SettingsButton.Visibility = Visibility.Hidden;
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
