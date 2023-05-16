@@ -38,9 +38,9 @@ namespace Tetris
         };
 
         private readonly Image[,] imageControls;
-        private readonly int maxDelay = 1000;
-        private readonly int minDelay = 75;
-        private int delayDecrease = 12;
+        private int maxDelay;
+        private int minDelay;
+        private int delayDecrease;
         private bool gamePaused = false;
 
         private GameState gameState = new GameState();
@@ -140,6 +140,8 @@ namespace Tetris
             }
 
             GameOverMenu.Visibility = Visibility.Visible;
+            SettingsButton.Visibility = Visibility.Visible;
+            SettingsButton.IsEnabled = true;
             FinalScoreText.Text = $"Score: {gameState.Score}";
         }
 
@@ -147,7 +149,7 @@ namespace Tetris
         {
             if (gameState.GameOver || gamePaused)
             {
-                if (e.Key != Key.P)
+                if (e.Key != Key.P || e.Key != Key.Escape)
                     return;
             }
 
@@ -174,6 +176,12 @@ namespace Tetris
                 case Key.Space:
                     gameState.DropBlock();
                     break;
+                case Key.Escape:
+                    DifficultyMenu.Visibility = Visibility.Hidden;
+                    SettingsMenu.Visibility = Visibility.Hidden;
+                    SettingsButton.Visibility = Visibility.Visible;
+                    SettingsButton.IsEnabled = true;
+                    break;
                 default:
                     return;
             }
@@ -181,16 +189,28 @@ namespace Tetris
             Draw(gameState);
         }
 
-        private async void GameCanvas_Loaded(object sender, RoutedEventArgs e)
+        private void GameCanvas_Loaded(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private async void StartGame()
+        {
+            gameState = new GameState();
+            DifficultyMenu.Visibility = Visibility.Hidden;
+            StartMenu.Visibility = Visibility.Hidden;
+            GameOverMenu.Visibility = Visibility.Hidden;
+            SettingsButton.Visibility = Visibility.Hidden;
+            gamePaused = false;
+            PauseMenu.Visibility = Visibility.Hidden;
+            PlayButton.Visibility = Visibility.Hidden;
             await GameLoop();
         }
 
-        private async void PlayAgain_Click(object sender, RoutedEventArgs e)
+        private void PlayAgain_Click(object sender, RoutedEventArgs e)
         {
-            gameState = new GameState();
-            GameOverMenu.Visibility = Visibility.Hidden;
-            await GameLoop();
+            DifficultyMenu.Visibility = Visibility.Visible;
+            SettingsButton.IsEnabled = false;
         }
 
         private void Pause()
@@ -201,12 +221,16 @@ namespace Tetris
                 gamePaused = false;
                 PlayButton.Visibility = Visibility.Hidden;
                 PauseMenu.Visibility = Visibility.Hidden;
+                SettingsButton.Visibility = Visibility.Hidden;
+                SettingsButton.IsEnabled = false;
             }
             else
             {
                 gamePaused = true;
                 PlayButton.Visibility = Visibility.Visible;
                 PauseMenu.Visibility = Visibility.Visible;
+                SettingsButton.Visibility = Visibility.Visible;
+                SettingsButton.IsEnabled = true;
             }
         }
 
@@ -222,25 +246,48 @@ namespace Tetris
 
         private void NewGame_Click(object sender, RoutedEventArgs e)
         {
-            
+            DifficultyMenu.Visibility = Visibility.Visible;
+            SettingsButton.IsEnabled = false;
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (SettingsMenu.Visibility == Visibility.Visible)
+                SettingsMenu.Visibility = Visibility.Hidden;
+            else
+                SettingsMenu.Visibility = Visibility.Visible;
         }
 
         private void EasyDifficulty_Click(object sender, RoutedEventArgs e)
         {
-
+            maxDelay = 1500;
+            minDelay = 300;
+            delayDecrease = 12;
+            StartGame();
         }
 
         private void MediumDifficulty_Click(object sender, RoutedEventArgs e)
         {
-
+            maxDelay = 1300;
+            minDelay = 200;
+            delayDecrease = 15;
+            StartGame();
         }
 
         private void HardDifficulty_Click(object sender, RoutedEventArgs e)
+        {
+            maxDelay = 1000;
+            minDelay = 100;
+            delayDecrease = 17;
+            StartGame();
+        }
+
+        private void EndGame_Click(object sender, RoutedEventArgs e)
+        {
+            StartMenu.Visibility = Visibility.Visible;
+        }
+
+        private void SaveSettings_Click(object sender, RoutedEventArgs e)
         {
 
         }

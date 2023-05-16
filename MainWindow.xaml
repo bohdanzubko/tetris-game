@@ -94,6 +94,12 @@
                 <TextBlock Text="Click Play to continue"
                            FontSize="16"
                            TextAlignment="Center" />
+
+                <Button Content="Exit"
+                        Background="#F45959"
+                        Margin="0,20,0,0"
+                        Padding="10"
+                        Click="EndGame_Click" />
             </StackPanel>
         </Grid>
 
@@ -134,13 +140,18 @@
                         Margin="0,20,0,0"
                         Padding="10"
                         Click="PlayAgain_Click" />
+
+                <Button Content="Exit"
+                        Background="#F45959"
+                        Margin="0,20,0,0"
+                        Padding="10"
+                        Click="EndGame_Click" />
             </StackPanel>
         </Grid>
 
         <Grid x:Name="StartMenu"
               Grid.RowSpan="2"
-              Grid.ColumnSpan="3"
-              Visibility="Hidden">
+              Grid.ColumnSpan="3">
             <Grid.Background>
                 <ImageBrush ImageSource="Assets/Background.png" />
             </Grid.Background>
@@ -159,14 +170,17 @@
                         Padding="10"
                         Click="NewGame_Click" />
             </StackPanel>
+        </Grid>
 
-            <StackPanel Name="Difficulty"
-                        Width="400"
+        <Grid x:Name="DifficultyMenu"
+              Grid.RowSpan="2"
+              Grid.ColumnSpan="3"
+              Visibility="Hidden">
+            <StackPanel Width="400"
                         Height="290"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Background="#321DB8"
-                        Visibility="Hidden">
+                        Background="#321DB8">
 
                 <TextBlock Text="Difficulty"
                            FontSize="36"
@@ -196,7 +210,8 @@
             </StackPanel>
         </Grid>
 
-        <Button Height="60"
+        <Button x:Name="SettingsButton"
+                Height="60"
                 Width="60"
                 Grid.Row="1"
                 Grid.Column="2"
@@ -210,7 +225,7 @@
             </Button.Background>
         </Button>
 
-        <Grid x:Name="Settings"
+        <Grid x:Name="SettingsMenu"
               Width="350"
               Height="305"
               Grid.RowSpan="2"
@@ -342,7 +357,7 @@
                     Height="35"
                     FontSize="15"
                     Padding="5"
-                    Click="PlayAgain_Click" />
+                    Click="SaveSettings_Click" />
 
         </Grid>
     </Grid>
