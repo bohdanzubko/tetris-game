@@ -1,10 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Xml.Serialization;
 
 namespace Tetris
 {
@@ -38,10 +40,14 @@ namespace Tetris
         };
 
         private readonly Image[,] imageControls;
+        private TetrisSettings settings = new TetrisSettings();
+        private TetrisSettings tempSettings = new TetrisSettings();
+        private XmlSerializer serializer = new XmlSerializer(typeof(TetrisSettings));
         private int maxDelay;
         private int minDelay;
         private int delayDecrease;
         private bool gamePaused = false;
+        private int activeSetting = 0;
 
         private GameState gameState = new GameState();
 
@@ -152,44 +158,67 @@ namespace Tetris
                     return;
             }
 
-            switch (e.Key)
+            if (e.Key == settings.MoveDownKey)
+                gameState.MoveBlockDown();
+            else if (e.Key == settings.MoveLeftKey)
+                gameState.MoveBlockLeft();
+            else if (e.Key == settings.MoveRightKey)
+                gameState.MoveBlockRight();
+            else if (e.Key == settings.DropBlockKey)
+                gameState.DropBlock();
+            else if (e.Key == settings.RotateCWKey)
+                gameState.RotateBlockCW();
+            else if (e.Key == settings.RotateCCWKey)
+                gameState.RotateBlockCCW();
+            else if (e.Key == Key.P)
+                PauseGame();
+            else if (e.Key == Key.Escape)
             {
-                case Key.A:
-                    gameState.MoveBlockLeft();
-                    break;
-                case Key.D:
-                    gameState.MoveBlockRight();
-                    break;
-                case Key.S:
-                    gameState.MoveBlockDown();
-                    break;
-                case Key.W:
-                    gameState.RotateBlockCW();
-                    break;
-                case Key.Z:
-                    gameState.RotateBlockCCW();
-                    break;
-                case Key.P:
-                    PauseGame();
-                    break;
-                case Key.Space:
-                    gameState.DropBlock();
-                    break;
-                case Key.Escape:
-                    DifficultyMenu.Visibility = Visibility.Hidden;
-                    SettingsMenu.Visibility = Visibility.Hidden;
-                    SettingsButton.Visibility = Visibility.Visible;
-                    break;
-                default:
-                    return;
+                activeSetting = 0;
+                KeyDown -= KeyScanWindow_KeyDown;
+                SettingsMenu.Visibility = Visibility.Hidden;
+                DifficultyMenu.Visibility = Visibility.Hidden;
+                SettingsMenu.Visibility = Visibility.Hidden;
+                SettingsButton.Visibility = Visibility.Visible;
+                PlayButton.IsEnabled = true;
             }
+            else return;
 
             Draw(gameState);
         }
 
         private void GameCanvas_Loaded(object sender, RoutedEventArgs e)
         {
+            DisableButtonNavigation();
 
+            try
+            {
+                using (TextReader reader = new StreamReader("TetrisSettings.xml"))
+                {
+                    settings = (TetrisSettings)serializer.Deserialize(reader);
+                }
+            }
+            catch (Exception ex)
+            {
+                settings = new TetrisSettings(Key.Down, Key.Left, Key.Right, Key.Space, Key.Up, Key.C);
+
+                using (TextWriter writer = new StreamWriter("TetrisSettings.xml"))
+                {
+                    serializer.Serialize(writer, settings);
+                }
+            }
+        }
+
+        private void DisableButtonNavigation()
+        {
+            Button[] allButtons = { MoveDownButton, MoveLeftButton, MoveRightButton, DropBlockButton, RotateCWButton, RotateCCWButton,
+                                    StartGameButton, SettingsButton, SaveAndQuitButton, ResetSettingsButton };
+
+            foreach (var button in allButtons)
+            {
+                KeyboardNavigation.SetDirectionalNavigation(button, KeyboardNavigationMode.None);
+                KeyboardNavigation.SetIsTabStop(button, false);
+            }
         }
 
         private async void StartGame()
@@ -246,14 +275,6 @@ namespace Tetris
             SettingsButton.Visibility = Visibility.Hidden;
         }
 
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            if (SettingsMenu.Visibility == Visibility.Visible)
-                SettingsMenu.Visibility = Visibility.Hidden;
-            else
-                SettingsMenu.Visibility = Visibility.Visible;
-        }
-
         private void EasyDifficulty_Click(object sender, RoutedEventArgs e)
         {
             maxDelay = 1500;
@@ -283,39 +304,174 @@ namespace Tetris
             StartMenu.Visibility = Visibility.Visible;
         }
 
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            if (SettingsMenu.Visibility == Visibility.Visible)
+            {
+                KeyDown -= KeyScanWindow_KeyDown;
+                SetSettings(settings);
+                SettingsMenu.Visibility = Visibility.Hidden;
+                PlayButton.IsEnabled = true;
+            }
+            else
+            {
+                SetSettings(settings);
+                tempSettings = settings;
+                PlayButton.IsEnabled = false;
+                SettingsMenu.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void KeyScanWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.A && e.Key <= Key.Z && e.Key != Key.P)
+            {
+                UpdateKeySetting(e.Key);
+
+                switch (activeSetting)
+                {
+                    case 1:
+                        MoveDownLabel.Text = "Move down: " + e.Key.ToString();
+                        MoveDownButton.Content = "Set key";
+                        break;
+                    case 2:
+                        MoveLeftLabel.Text = "Move left: " + e.Key.ToString();
+                        MoveLeftButton.Content = "Set key";
+                        break;
+                    case 3:
+                        MoveRightLabel.Text = "Move right: " + e.Key.ToString();
+                        MoveRightButton.Content = "Set key";
+                        break;
+                    case 4:
+                        DropBlockLabel.Text = "Drop block: " + e.Key.ToString();
+                        DropBlockButton.Content = "Set key";
+                        break;
+                    case 5:
+                        RotateCWLabel.Text = "Rotate CW: " + e.Key.ToString();
+                        RotateCWButton.Content = "Set key";
+                        break;
+                    case 6:
+                        RotateCCWLabel.Text = "Rotate CCW: " + e.Key.ToString();
+                        RotateCCWButton.Content = "Set key";
+                        break;
+                    default: break;
+                }
+            }
+
+            activeSetting = 0;
+            KeyDown -= KeyScanWindow_KeyDown;
+        }
+
+        private void UpdateKeySetting(Key selectedKey)
+        {
+            switch (activeSetting)
+            {
+                case 1: tempSettings.MoveDownKey = selectedKey; break;
+                case 2: tempSettings.MoveLeftKey = selectedKey; break;
+                case 3: tempSettings.MoveRightKey = selectedKey; break;
+                case 4: tempSettings.DropBlockKey = selectedKey; break;
+                case 5: tempSettings.RotateCWKey = selectedKey; break;
+                case 6: tempSettings.RotateCCWKey = selectedKey; break;
+                default: break;
+            }
+        }
+
+        private void SetSettings(TetrisSettings setSettings)
+        {
+            activeSetting = 0;
+
+            MoveDownLabel.Text = "Move down: " + setSettings.MoveDownKey.ToString();
+            MoveLeftLabel.Text = "Move left: " + setSettings.MoveLeftKey.ToString();
+            MoveRightLabel.Text = "Move right: " + setSettings.MoveRightKey.ToString();
+            DropBlockLabel.Text = "Drop block: " + setSettings.DropBlockKey.ToString();
+            RotateCWLabel.Text = "Rotate CW: " + setSettings.RotateCWKey.ToString();
+            RotateCCWLabel.Text = "Rotate CCW: " + setSettings.RotateCCWKey.ToString();
+
+            MoveLeftButton.Content = "Set key";
+            MoveDownButton.Content = "Set key";
+            RotateCCWButton.Content = "Set key";
+            MoveRightButton.Content = "Set key";
+            DropBlockButton.Content = "Set key";
+            RotateCWButton.Content = "Set key";
+        }
+
         private void SaveSettings_Click(object sender, RoutedEventArgs e)
         {
+            KeyDown -= KeyScanWindow_KeyDown;
+            settings = tempSettings;
+            SetSettings(tempSettings);
+            PlayButton.IsEnabled = true;
+            using (TextWriter writer = new StreamWriter("TetrisSettings.xml"))
+            {
+                serializer.Serialize(writer, settings);
+            }
+            SettingsMenu.Visibility = Visibility.Hidden;
+        }
 
+        private void ResetSettings_Click(object sender, RoutedEventArgs e)
+        {
+            tempSettings = new TetrisSettings(Key.Down, Key.Left, Key.Right, Key.Space, Key.Up, Key.C);
+            SetSettings(tempSettings);
         }
 
         private void MoveDownKey_Click(object sender, RoutedEventArgs e)
         {
-
+            if (activeSetting == 0)
+            {
+                activeSetting = 1;
+                KeyDown += KeyScanWindow_KeyDown;
+                MoveDownButton.Content = "Press any key";
+            }
         }
 
         private void MoveLeftKey_Click(object sender, RoutedEventArgs e)
         {
-
+            if (activeSetting == 0)
+            {
+                activeSetting = 2;
+                KeyDown += KeyScanWindow_KeyDown;
+                MoveLeftButton.Content = "Press any key";
+            }
         }
 
         private void MoveRightKey_Click(object sender, RoutedEventArgs e)
         {
-
+            if (activeSetting == 0)
+            {
+                activeSetting = 3;
+                KeyDown += KeyScanWindow_KeyDown;
+                MoveRightButton.Content = "Press any key";
+            }
         }
 
         private void DropBlockKey_Click(object sender, RoutedEventArgs e)
         {
-
+            if (activeSetting == 0)
+            {
+                activeSetting = 4;
+                KeyDown += KeyScanWindow_KeyDown;
+                DropBlockButton.Content = "Press any key";
+            }
         }
 
         private void RotateCWKey_Click(object sender, RoutedEventArgs e)
         {
-
+            if (activeSetting == 0)
+            {
+                activeSetting = 5;
+                KeyDown += KeyScanWindow_KeyDown;
+                RotateCWButton.Content = "Press any key";
+            }
         }
 
         private void RotateCCWKey_Click(object sender, RoutedEventArgs e)
         {
-
+            if (activeSetting == 0)
+            {
+                activeSetting = 6;
+                KeyDown += KeyScanWindow_KeyDown;
+                RotateCCWButton.Content = "Press any key";
+            }
         }
     }
 }

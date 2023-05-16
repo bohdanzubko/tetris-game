@@ -66,6 +66,7 @@
         </StackPanel>
 
         <Button x:Name="PauseButton"
+                Style="{DynamicResource SettingsButton}"
                 Height="60"
                 Width="60"
                 Grid.Row="1"
@@ -95,7 +96,10 @@
                            FontSize="16"
                            TextAlignment="Center" />
 
-                <Button Content="Exit"
+                <Button Name="EndGameButton"
+                        Style="{DynamicResource RoundButton}"
+                        Content="Exit"
+                        Height="60"
                         Background="#F45959"
                         Margin="0,20,0,0"
                         Padding="10"
@@ -104,6 +108,7 @@
         </Grid>
 
         <Button x:Name="PlayButton"
+                Style="{DynamicResource SettingsButton}"
                 Height="60"
                 Width="60"
                 Grid.Row="1"
@@ -136,14 +141,19 @@
                            TextAlignment="Center" />
 
                 <Button Content="Play Again"
+                        Style="{DynamicResource RoundButton}"
                         Background="LightGreen"
                         Margin="0,20,0,0"
+                        Height="60"
                         Padding="10"
                         Click="PlayAgain_Click" />
 
-                <Button Content="Exit"
+                <Button x:Name="ExitButton"
+                        Content="Exit"
+                        Style="{DynamicResource RoundButton}"
                         Background="#F45959"
                         Margin="0,20,0,0"
+                        Height="60"
                         Padding="10"
                         Click="EndGame_Click" />
             </StackPanel>
@@ -163,8 +173,11 @@
                        VerticalAlignment="Top"
                        Source="Assets/TetrisName.png" />
 
-                <Button Content="Play Tetris"
+                <Button x:Name="StartGameButton"
+                        Style="{DynamicResource RoundButton}"
+                        Content="Play Tetris"
                         Width="250"
+                        Height="60"
                         Background="LightGreen"
                         Margin="0,150,0,0"
                         Padding="10"
@@ -188,21 +201,27 @@
                            TextAlignment="Center" />
 
                 <Button Content="Easy"
+                        Style="{DynamicResource RoundButton}"
                         Width="200"
+                        Height="60"
                         Background="#6DC54E"
                         Margin="5"
                         Padding="10"
                         Click="EasyDifficulty_Click" />
 
                 <Button Content="Medium"
+                        Style="{DynamicResource RoundButton}"
                         Width="200"
+                        Height="60"
                         Background="#F6B22D"
                         Margin="5"
                         Padding="10"
                         Click="MediumDifficulty_Click" />
 
                 <Button Content="Hard"
+                        Style="{DynamicResource RoundButton}"
                         Width="200"
+                        Height="60"
                         Background="#F83939"
                         Margin="5"
                         Padding="10"
@@ -211,6 +230,7 @@
         </Grid>
 
         <Button x:Name="SettingsButton"
+                Style="{DynamicResource SettingsButton}"
                 Height="60"
                 Width="60"
                 Grid.Row="1"
@@ -227,7 +247,7 @@
 
         <Grid x:Name="SettingsMenu"
               Width="350"
-              Height="305"
+              Height="350"
               Grid.RowSpan="2"
               Grid.ColumnSpan="3"
               Background="#321DB8"
@@ -245,119 +265,155 @@
 
             <TextBlock Text="Settings"
                        FontSize="28"
-                       Margin="5"
-                       Padding="5"
-                       TextAlignment="Center" />
+                       Padding="10"
+                       TextAlignment="Center"
+                       Grid.ColumnSpan="2" />
 
             <StackPanel Grid.Row="1">
-                <TextBlock Text="Move down: "
+                <TextBlock x:Name="MoveDownLabel"
+                           Text="Move down: "
                            Width="180"
                            FontSize="16"
                            Padding="10"
                            VerticalAlignment="Top"
                            TextAlignment="Center" />
 
-                <TextBlock Text="Move left: "
+                <TextBlock x:Name="MoveLeftLabel"
+                           Text="Move left: "
                            Width="180"
                            FontSize="16"
                            Padding="10"
                            VerticalAlignment="Top"
                            TextAlignment="Center" />
 
-                <TextBlock Text="Move right: "
+                <TextBlock x:Name="MoveRightLabel"
+                           Text="Move right: "
                            Width="180"
                            FontSize="16"
                            Padding="10"
                            VerticalAlignment="Top"
                            TextAlignment="Center" />
 
-                <TextBlock Text="Drop block: "
+                <TextBlock x:Name="DropBlockLabel"
+                           Text="Drop block: "
                            Width="180"
                            FontSize="16"
                            Padding="10"
                            VerticalAlignment="Top"
                            TextAlignment="Center" />
 
-                <TextBlock Text="Rotate CW: "
+                <TextBlock x:Name="RotateCWLabel"
+                           Text="Rotate CW: "
                            Width="180"
                            FontSize="16"
                            Padding="10"
                            VerticalAlignment="Top"
                            TextAlignment="Center" />
 
-                <TextBlock Text="Rotate CCW: "
+                <TextBlock x:Name="RotateCCWLabel"
+                           Text="Rotate CCW: "
                            Width="180"
                            FontSize="16"
                            Padding="10"
                            VerticalAlignment="Top"
                            TextAlignment="Center" />
+
+                <Button Name="ResetSettingsButton"
+                        Style="{DynamicResource RoundButton}"
+                        Content="Reset settings"
+                        Background="#4097E7"
+                        Width="150"
+                        Height="35"
+                        FontSize="15"
+                        Margin="3.3"
+                        Padding="5"
+                        Click="ResetSettings_Click" />
             </StackPanel>
 
             <StackPanel Grid.Column="1"
                         Grid.Row="1">
-                <Button Content="Set key"
+                <Button x:Name="MoveDownButton"
+                        Style="{DynamicResource RoundButton}"
+                        Content="Set key"
                         Height="30"
                         Width="130"
                         Margin="5"
                         FontSize="15"
                         Background="#686868"
                         VerticalAlignment="Top"
+                        IsTabStop="True"
                         Click="MoveDownKey_Click" />
 
-                <Button Content="Set key"
+                <Button x:Name="MoveLeftButton"
+                        Style="{DynamicResource RoundButton}"
+                        Content="Set key"
                         Height="30"
                         Width="130"
                         Margin="5"
                         FontSize="15"
                         Background="#686868"
                         VerticalAlignment="Top"
+                        IsTabStop="True"
                         Click="MoveLeftKey_Click" />
 
-                <Button Content="Set key"
+                <Button x:Name="MoveRightButton"
+                        Style="{DynamicResource RoundButton}"
+                        Content="Set key"
                         Height="30"
                         Width="130"
                         Margin="5"
                         FontSize="15"
                         Background="#686868"
                         VerticalAlignment="Top"
+                        IsTabStop="True"
                         Click="MoveRightKey_Click" />
 
-                <Button Content="Set key"
+                <Button x:Name="DropBlockButton"
+                        Style="{DynamicResource RoundButton}"
+                        Content="Set key"
                         Height="30"
                         Width="130"
                         Margin="5"
                         FontSize="15"
                         Background="#686868"
                         VerticalAlignment="Top"
+                        IsTabStop="True"
                         Click="DropBlockKey_Click" />
 
-                <Button Content="Set key"
+                <Button x:Name="RotateCWButton"
+                        Style="{DynamicResource RoundButton}"
+                        Content="Set key"
                         Height="30"
                         Width="130"
                         Margin="5"
                         FontSize="15"
                         Background="#686868"
                         VerticalAlignment="Top"
+                        IsTabStop="False"
                         Click="RotateCWKey_Click" />
 
-                <Button Content="Set key"
+                <Button x:Name="RotateCCWButton"
+                        Style="{DynamicResource RoundButton}"
+                        Content="Set key"
                         Height="30"
                         Width="130"
                         Margin="5"
                         FontSize="15"
                         Background="#686868"
-                        VerticalAlignment="Top"
+                        IsTabStop="False"
                         Click="RotateCCWKey_Click" />
-            </StackPanel>
 
-            <Button Grid.Column="1"
-                    Content="Save and quit"
-                    Background="#4097E7"
-                    Width="150"
-                    Height="35"
-                    FontSize="15"
-                    Padding="5"
-                    Click="SaveSettings_Click" />
+                <Button Name="SaveAndQuitButton"
+                        Style="{DynamicResource RoundButton}"
+                        Content="Save and quit"
+                        Background="#4097E7"
+                        Width="150"
+                        Height="35"
+                        FontSize="15"
+                        Margin="10"
+                        Padding="5"
+                        Click="SaveSettings_Click" />
+            </StackPanel>
 
         </Grid>
     </Grid>
