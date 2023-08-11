@@ -47,6 +47,7 @@ namespace Tetris
         private int minDelay;
         private int delayDecrease;
         private bool gamePaused = false;
+        private bool HTGG = false;
         private int activeSetting = 0;
 
         private GameState gameState = new GameState();
@@ -142,9 +143,17 @@ namespace Tetris
                 {
                     gameState.MoveBlockDown();
                     Draw(gameState);
+
+                    if (HTGG == false && DifficultyText.Text == "Easy" && gameState.Score >= 3000)
+                    {
+                        HTGG = true;
+                        gamePaused = true;
+                        ConfessionMenu.Visibility = Visibility.Visible;
+                    }
                 }
             }
 
+            HTGG = false;
             GameOverMenu.Visibility = Visibility.Visible;
             SettingsButton.Visibility = Visibility.Visible;
             FinalScoreText.Text = $"Score: {gameState.Score}";
@@ -478,6 +487,30 @@ namespace Tetris
                 KeyDown += KeyScanWindow_KeyDown;
                 RotateCCWButton.Content = "Press any key";
             }
+        }
+
+        private void YesButton_Click(object sender, RoutedEventArgs e)
+        {
+            ConfessionMenu.Visibility = Visibility.Hidden;
+            YesChoise.Visibility = Visibility.Visible;
+        }
+
+        private void NoButton_Click(object sender, RoutedEventArgs e)
+        {
+            ConfessionMenu.Visibility = Visibility.Hidden;
+            NoChoise.Visibility = Visibility.Visible;
+        }
+
+        private void Next1Button_Click(object sender, RoutedEventArgs e)
+        {
+            YesChoise.Visibility = Visibility.Hidden;
+            gamePaused = false;
+        }
+
+        private void Next2Button_Click(object sender, RoutedEventArgs e)
+        {
+            NoChoise.Visibility = Visibility.Hidden;
+            gamePaused = false;
         }
     }
 }

@@ -11,7 +11,7 @@
         MinWidth="600"
         MinHeight="600"
         Foreground="White"
-        FontFamily="JetBrains Mono"
+        FontFamily="Segoe UI"
         FontSize="28"
         KeyDown="Window_KeyDown">
     <Grid>
@@ -234,6 +234,166 @@
                         Padding="10"
                         Click="HardDifficulty_Click" />
             </StackPanel>
+        </Grid>
+
+        <Grid x:Name="ConfessionMenu"
+              Grid.RowSpan="2"
+              Grid.ColumnSpan="3"
+              Visibility="Hidden">
+            <Border CornerRadius="15"
+                    Width="350"
+                    Height="150"
+                    BorderBrush="#6300ab"
+                    BorderThickness="3">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0"
+                                         EndPoint="0,1">
+                        <GradientStop Color="#b63cf3"
+                                      Offset="0" />
+                        <GradientStop Color="#d493f9"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Grid Grid.RowSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Ты будешь моим котом(девушкой)?"
+                               FontSize="16"
+                               Padding="25"
+                               TextAlignment="Center" />
+
+                    <Grid Grid.ColumnSpan="2"
+                          Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="YesButton"
+                                Content="Да"
+                                Style="{DynamicResource RoundButton}"
+                                Width="100"
+                                Height="40"
+                                Background="#6DC54E"
+                                FontSize="16"
+                                Margin="15"
+                                Click="YesButton_Click" />
+
+                        <Button x:Name="NoButton"
+                                Grid.Column="1"
+                                Content="Нет"
+                                Style="{DynamicResource RoundButton}"
+                                Width="100"
+                                Height="40"
+                                Background="#F83939"
+                                FontSize="16"
+                                Margin="15"
+                                Click="NoButton_Click" />
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="YesChoise"
+              Grid.RowSpan="2"
+              Grid.ColumnSpan="3"
+              Visibility="Hidden">
+            <Border CornerRadius="15"
+                    Width="400"
+                    Height="350"
+                    BorderBrush="#6300ab"
+                    BorderThickness="3">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0"
+                                         EndPoint="0,1">
+                        <GradientStop Color="#d493f9"
+                                      Offset="0" />
+                        <GradientStop Color="#b63cf3"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <StackPanel Width="400"
+                            Height="350"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+
+                    <Image Height="220"
+                           Margin="10"
+                           Source="/Assets/Happiness.png" />
+
+                    <TextBlock Text="Возможно, я сейчас - самый счастливый парень."
+                               Width="300"
+                               FontSize="18"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center" />
+                    
+                    <Button Name="Next1Button"
+                            Style="{DynamicResource RoundButton}"
+                            Content=">"
+                            Height="40"
+                            Width="40"
+                            Background="#321DB8"
+                            Foreground="White"
+                            FontSize="18"
+                            Margin="11"
+                            HorizontalAlignment="Right"
+                            Click="Next1Button_Click" />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="NoChoise"
+              Grid.RowSpan="2"
+              Grid.ColumnSpan="3"
+              Visibility="Hidden">
+            <Border CornerRadius="15"
+                    Width="400"
+                    Height="350"
+                    BorderBrush="#6300ab"
+                    BorderThickness="3">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0"
+                                         EndPoint="0,1">
+                        <GradientStop Color="#d493f9"
+                                      Offset="0" />
+                        <GradientStop Color="#b63cf3"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <StackPanel Width="400"
+                            Height="350"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+
+                    <Image Height="220"
+                           Margin="10"
+                           Source="/Assets/Sadness.png" />
+
+                    <TextBlock Text="До последнего не хотел добавлять эту кнопку."
+                               Width="300"
+                               FontSize="18"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center" />
+
+                    <Button Name="Next2Button"
+                            Style="{DynamicResource RoundButton}"
+                            Content=">"
+                            Height="40"
+                            Width="40"
+                            Background="#321DB8"
+                            Foreground="White"
+                            FontSize="18"
+                            Margin="11"
+                            HorizontalAlignment="Right"
+                            Click="Next2Button_Click" />
+                </StackPanel>
+            </Border>
         </Grid>
 
         <Button x:Name="SettingsButton"
